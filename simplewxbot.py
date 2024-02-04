@@ -99,8 +99,8 @@ async def print_json(source: str=Form(), content: str = Form(), isMentioned: str
             fb=args[1]
             cmd='curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "你的微信名称","type": "text","content":"群内的'+dname+'发送了反馈，内容为'+fb+'，请迅速处理!"}\''
             os.system(cmd)
-        conn.commit()
-        conn.close()
+    conn.commit()
+    conn.close()
     return a
 
 if __name__ == "__main__":
