@@ -78,5 +78,5 @@ feedback 反馈内容 发送反馈
 # 存在问题
 1.程序可能存在sql注入漏洞，可能会导致机器人功能异常
 2.目前机器人只能部署到一个群内，部署到多个群需要开启多个docker服务和python脚本，十分麻烦且浪费资源
-3.微信定时两天掉线，详细解决方案以及讨论请查看https://github.com/danni-cool/wechatbot-webhook内的issue
+3.微信定时两天掉线，详细解决方案以及讨论请查看https://github.com/danni-cool/wechatbot-webhook 内的issue。
 4.只能用手机先登录机器人的微信账号，然后再扫码登录服务器docker中的微信，而且手机上的机器人微信还不能退出，否则机器人会掉线，即你需要有一台设备一直登录着机器人微信，并且这台设备能随时扫码登录服务器上的微信
