@@ -16,7 +16,7 @@ app = FastAPI()
 scheduler = BackgroundScheduler()
 
 '''
-此处利用了feedparser和bs4等库，实现了定时推送rss和网站最新文章的功能，可以参考设计自己的定时任务
+此处利用了feedparser和bs4等库，实现了定时推送rss和网站最新文章的功能，可以参考设计自己的定时任务，示例的rss链接文件也放到项目中了
 
 def getrss(strings,url):
     d=feedparser.parse(url)
