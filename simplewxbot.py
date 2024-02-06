@@ -5,12 +5,18 @@ import json
 import datetime
 import sqlite3 as sl
 import os
+
+'''
 import requests
 from bs4 import BeautifulSoup
 import feedparser
+'''
 
 app = FastAPI()
 scheduler = BackgroundScheduler()
+
+'''
+此处利用了feedparser和bs4等库，实现了定时推送rss和网站最新文章的功能，可以参考设计自己的定时任务
 
 def getrss(strings,url):
     d=feedparser.parse(url)
@@ -50,22 +56,25 @@ def roomdailynews():
     news=news+"以上就是今早的新内容，一起来学习呀！"
     url1 = 'http://127.0.0.1:3001/webhook/msg'
     headers1 = {"content-type":"application/json"}
-    payload1 = {"to":"HackTB实验室","isRoom": True ,"type": "text","content":news}
+    payload1 = {"to":"myroom","isRoom": True ,"type": "text","content":news}
     requests.post(url1,json=payload1,headers=headers1)
+'''
 
 def wxautocheck():
-    reply = 'curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "Doom.","type": "text","content":"I am still alive!"}\''
+    reply = 'curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "YourWXname","type": "text","content":"I am still alive!"}\''
     os.system(reply)
+
+# 上方代码作用为自动发送存活信息到指定微信好友处
 
 @app.on_event("startup")
 async def app_start():
-    scheduler.add_job(roomdailynews, 'interval', days=1)
-    scheduler.add_job(wxautocheck, 'interval', hours=1)
+    #scheduler.add_job(roomdailynews, 'interval', days=1)  # 自动推送定时任务，每天执行一次
+    scheduler.add_job(wxautocheck, 'interval', hours=1) # 自动发送存活信息，每小时执行一次
     scheduler.start()
 
 @app.get("/check")
 async def check():
-    a="success!"
+    a="success!"     # 此处新添加了一个接口，主动get请求后会返回存活信息
     return a
 
 @app.post("/receive_msg")
@@ -147,14 +156,14 @@ async def print_json(source: str=Form(), content: str = Form(), isMentioned: str
             dtime=data[1]
             dtime=dtime[2:-3]
             a={"success": True,"data": {"type": "text","content": "你好"+name+"\n"+dname+"最后的发言时间是："+dtime+"\n记得要多发言，营造活跃的群内气氛哦！"}}
-        if(args[0]=="all"):
+        if(args[0]=="all"):   #all功能处
             os.system("rm -rf all_menbers.txt")
             sql="select id,roomname,last_post_time from POST"
             cursor.execute(sql)
             data = cursor.fetchall()
             with open("all_menbers.txt", "a") as f:
                 for item in data:
-                    item=str(item)
+                    item=str(item)                                   
                     item=item.split(",")
                     roomname=item[1]
                     roomname=roomname[2:-1]
@@ -164,14 +173,14 @@ async def print_json(source: str=Form(), content: str = Form(), isMentioned: str
                 f.close()
             os.system("curl --location --request POST 'http://localhost:3001/webhook/msg' --form 'to=HackTB实验室' --form content=@'/root/ScriptKidB0T/all_menbers.txt' --form 'isRoom=1'")
             a={"success": True,"data": {"type": "text","content":"以上是大家的发言时间记录，请大家踊跃发言，一起成长呀"}}
-        if(args[0]=="feedback"):
+        if(args[0]=="feedback"):    #feedback功能处
             sql="select roomname from POST where username='%s'" % (name)
             cursor.execute(sql)
             data = cursor.fetchall()
             data=str(data)
-            data=data.split(",")
+            data=data.split(",")                    
             dname=data[0]
-            dname=dname[3:-1]
+            dname=dname[3:-1]                                       
             a={"success": True,"data": {"type": "text","content":"成员"+dname+"，你的反馈我已经告诉主人了，感谢你的支持呀！"}}
             fb=args[1]
             cmd='curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "Doom.","type": "text","content":"实验室的'+dname+'发送了反馈，内容为'+fb+'，请迅速处理!"}\''
