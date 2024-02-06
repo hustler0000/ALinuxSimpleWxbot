@@ -12,7 +12,8 @@ sudo apt-get install python-is-python3 curl python-pip git
 ```
 pip安装需要的库：
 ```shell
-python -m pip install fastapi uvicorn python-multipart -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+python -m pip install fastapi uvicorn python-multipart apscheduler -i https://pypi.tuna.tsinghua.edu.cn/simple
+feedparser，bs4和requests库可装可不装，项目中是为了实现定时推送
 ```
 然后安装docker，各发行版安装方法大同小异，这里以Ubuntu为例：
 ```shell
