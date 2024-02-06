@@ -48,8 +48,10 @@ pip install ‎pywinauto psutil pandas numpy -i https://pypi.tuna.tsinghua.edu.c
 ## 修改主程序
 ```
 将项目克隆到服务器后，用vim或nano等文本编辑器打开simplewxbot.py进行修改：
-找到程序第88行，即all功能处，将群名修改为你要部署的群的群名称，将路径改为你存放all_menbers.txt的相应绝对路径
-找到程序第100行，即feedback功能处，将微信名称改为你的微信名称
+在程序第64行处，将YourWXname修改为你的微信用户名
+在程序第72行处，可以调整自动任务的执行时间，比如seconds=1，minutes=1，hours=1，day=1等
+找到程序第159行左右，即"all"功能处，将群名修改为你要部署的群的群名称，将路径改为你存放all_menbers.txt的相应绝对路径
+找到程序第176行左右，即"feedback"功能处，将微信名称改为你的微信名称
 ```
 # 主程序
 该机器人适用于linux服务器环境，这里只做linux服务器的说明
@@ -79,7 +81,8 @@ feedback 反馈内容 发送反馈
 
 当有群成员使用发送反馈时，机器人会向你的主微信账号发送反馈内容，当有新群员加入时，机器人也会提醒你引导成员将自己的群昵称添加进数据库内，当然你也可以手动操作数据库来添加。
 为了方便地手动操作数据库，还有一个SqliteOperate.py文件，这个python程序提供了简单管理sqlite数据库的条件，运行该程序，并输入相应数据库语句来对你的数据库进行操作。
-用post请求访问服务器的3001端口下的/healthz?token=你的token 路径可以检查机器人是否掉线
+用post请求访问服务器的3001端口下的/healthz?token=你的token 路径可以检查机器人docker程序是否掉线
+用get请求访问服务器8080端口下的/check 路径可以检查机器人python程序是否掉线
 ```
 # 原理
 十分简单，因为是二次开发，就是docker收发微信信息，收到的信息通过api转发到python跑的api服务中并且处理
