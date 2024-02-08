@@ -68,8 +68,8 @@ def wxautocheck():
 
 @app.on_event("startup")
 async def app_start():
-    #scheduler.add_job(roomdailynews, 'corn', hour=7)  # 每天早上7点自动推送文章
-    scheduler.add_job(wxautocheck, 'corn', hour=0-23) # 自动发送存活信息，每整点执行一次
+    #scheduler.add_job(roomdailynews, 'cron', hour=7)  # 每天早上7点自动推送文章
+    scheduler.add_job(wxautocheck, 'cron', hour='*') # 自动发送存活信息，每整点执行一次
     scheduler.start()
 
 @app.get("/check")
