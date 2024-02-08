@@ -68,13 +68,15 @@ def wxautocheck():
 
 @app.on_event("startup")
 async def app_start():
-    #scheduler.add_job(roomdailynews, 'interval', days=1)  # 自动推送定时任务，每天执行一次
-    scheduler.add_job(wxautocheck, 'interval', hours=1) # 自动发送存活信息，每小时执行一次
+    #scheduler.add_job(roomdailynews, 'corn', hour=7)  # 每天早上7点自动推送文章
+    scheduler.add_job(wxautocheck, 'corn', hour=0-23) # 自动发送存活信息，每整点执行一次
     scheduler.start()
 
 @app.get("/check")
 async def check():
-    a="success!"     # 此处新添加了一个接口，主动get请求后会返回存活信息
+    reply = 'curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "YourWXname","type": "text","content":"Alive message from check api!"}\''
+    os.system(reply)
+    a="success!"     # 此处新添加了一个接口，主动get请求后会返回存活信息，并对相应微信账号发送一条存活消息
     return a
 
 @app.post("/receive_msg")
