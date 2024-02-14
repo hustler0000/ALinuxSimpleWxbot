@@ -1,3 +1,5 @@
+# 鸣谢
+感谢xiaozhao在测试过程的大力协助，这里是他的博客：https://aaaaaaamua.github.io/
 # SimpleWxbot
 ```
 基于https://github.com/danni-cool/wechatbot-webhook
