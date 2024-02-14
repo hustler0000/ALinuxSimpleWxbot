@@ -29,7 +29,7 @@ sudo docker pull dannicool/docker-wechatbot-webhook
 ```
 克隆库
 ```shell
-git clone https://github.com/hustler0000/SimpleWxbot
+git clone https://github.com/hustler0000/ALinuxSimpleWxbot
 ```
 # 初始化
 在使用机器人之前，我们需要有一个微信账号来运行机器人，建议使用小号或者直接新注册一个微信账号，建议这个机器人账号添加常用微信号为好友，方便机器人通知反馈。运行机器人的账号必须实名，否则无法登录，也无法使用微信机器人，这是腾讯的限制，与项目无关
