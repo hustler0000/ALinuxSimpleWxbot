@@ -134,7 +134,7 @@ async def print_json(source: str=Form(), content: str = Form(), isMentioned: str
         if(args[0]=="check"):
             a = {"success": True, "data": {"type": "text", "content":"I am still alive!"}}
         if(args[0]=="help"):
-            a={"success": True,"data": {"type": "text","content": "我是Scr1ptKidB0t，我会默默记下大家的最后发言时间\n@我发消息可以触发指令，大家@我的时候要我回复了才能继续@哦：\n\n改昵称必看（重要）：\nroomname 群昵称 新老群成员可以使用这个修改在小本本里的群昵称，方便我称呼和统计最后发言时间，此功能只有在自己修改了群昵称后需要操作一次哦\nusername 群昵称 此指令可以修改在小本本里的微信昵称，如果机器人没有提示请不要操作\n以上两条指令，如无必要请不要操作，并且不要同时修改群昵称和微信昵称，不然机器人可能会坏掉，谢谢\n\nhelp 显示本帮助文档\nlast 显示本人最后发言时间\nsearch 某人 输出某人的最后发言时间\nall 输出一个文件，里面是所有人的最后发言时间\ncheck 检查机器人存活状态\nfeedback 反馈内容 发送反馈\n\n项目地址：https://github.com/hustler0000/ALinuxSimpleWxbot\n\n希望大家珍惜我，不要@我刷屏，不要连续@我，玩坏了掉线了及时告知我的主人，希望能和大家一起进步呀"}}
+            a={"success": True,"data": {"type": "text","content": "我是群内机器人，我会默默记下大家的最后发言时间\n@我发消息可以触发指令，大家@我的时候要我回复了才能继续@哦：\n\n改昵称必看（重要）：\nroomname 群昵称 新老群成员可以使用这个修改在小本本里的群昵称，方便我称呼和统计最后发言时间，此功能只有在自己修改了群昵称后需要操作一次哦\nusername 群昵称 此指令可以修改在小本本里的微信昵称，如果机器人没有提示请不要操作\n以上两条指令，如无必要请不要操作，并且不要同时修改群昵称和微信昵称，不然机器人可能会坏掉，谢谢\n\nhelp 显示本帮助文档\nlast 显示本人最后发言时间\nsearch 某人 输出某人的最后发言时间\nall 输出一个文件，里面是所有人的最后发言时间\ncheck 检查机器人存活状态\nfeedback 反馈内容 发送反馈\n\n项目地址：https://github.com/hustler0000/ALinuxSimpleWxbot\n\n希望大家珍惜我，不要@我刷屏，不要连续@我，玩坏了掉线了及时告知我的主人，希望能和大家一起进步呀"}}
         if(args[0]=="last"):
             sql="select roomname,last_post_time from POST where username='%s'" % (name)
             cursor.execute(sql)
