@@ -76,7 +76,7 @@ async def app_start():
 async def check():
     reply = 'curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "YourWXname","type": "text","content":"Alive message from check api!"}\''
     os.system(reply)
-    a="success!"     # 此处新添加了一个接口，主动get请求后会返回存活信息，并对相应微信账号发送一条存活消息
+    a="success!"     # 此处新添加了一个接口，主动get请求后会返回存活信息，并向相应微信账号发送一条存活消息
     return a
 
 @app.post("/receive_msg")
