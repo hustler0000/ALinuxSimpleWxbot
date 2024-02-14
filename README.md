@@ -54,7 +54,7 @@ pip install ‎pywinauto psutil pandas numpy -i https://pypi.tuna.tsinghua.edu.c
 找到程序第176行左右，即"feedback"功能处，将微信名称改为你的微信名称
 ```
 # 主程序
-该机器人适用于linux服务器环境，这里只做linux服务器的说明
+该机器人适用于linux服务器环境，Windows服务器请看https://github.com/hustler0000/AWindowsSimpleWxbot
 ## 启动
 使用命令
 ```shell
