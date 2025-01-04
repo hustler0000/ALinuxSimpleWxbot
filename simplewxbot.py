@@ -99,8 +99,8 @@ async def print_json(source: str=Form(), content: str = Form(), isMentioned: str
     if(data==""):
         sql="replace into POST(username,last_post_time) values('%s','%s')" % (name, time)
         cursor.execute(sql)
-        a = {"success": True, "data": {"type": "text", "content": "我还不认识你，可能因为你是新成员，或者改了微信昵称，不过我已经把你加到我的小本本里了，如果你是新人，请使用：\nroomname 群昵称\n这条指令，在我的小本本上记下你的群昵称，欢迎你加入到HackTB实验室这个大家庭！\n\n如果你是修改了微信昵称，请使用：\nusername 你的群昵称\n在我的小本本上记下你的新微信昵称\n请不要同时修改微信昵称和群昵称，不然我真的记不过来呀[流泪]望见谅\n\n@我并输入help可以呼出我的帮助菜单哦！"}}
-        cmd = 'curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "Doom.","type": "text","content":"实验室有新成员或者有人改了微信昵称，新人或者昵称为' + name + '，请迅速检查处理!"}\''
+        a = {"success": True, "data": {"type": "text", "content": "我还不认识你，可能因为你是新成员，或者改了微信昵称，不过我已经把你加到我的小本本里了，如果你是新人，请使用：\nroomname 群昵称\n这条指令，在我的小本本上记下你的群昵称，欢迎你加入到某某群这个大家庭！\n\n如果你是修改了微信昵称，请使用：\nusername 你的群昵称\n在我的小本本上记下你的新微信昵称\n请不要同时修改微信昵称和群昵称，不然我真的记不过来呀[流泪]望见谅\n\n@我并输入help可以呼出我的帮助菜单哦！"}}
+        cmd = 'curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "Doom.","type": "text","content":"有新成员或者有人改了微信昵称，新人或者昵称为' + name + '，请迅速检查处理!"}\''
         os.system(cmd)
     elif(isMentioned!="1"):
         sql="update POST set last_post_time='%s' where username='%s'" % (time,name)
@@ -173,7 +173,7 @@ async def print_json(source: str=Form(), content: str = Form(), isMentioned: str
                     time=time[2:-2]
                     f.write(roomname+" "+time+"\n")
                 f.close()
-            os.system("curl --location --request POST 'http://localhost:3001/webhook/msg' --form 'to=HackTB实验室' --form content=@'/root/ScriptKidB0T/all_menbers.txt' --form 'isRoom=1'")
+            os.system("curl --location --request POST 'http://localhost:3001/webhook/msg' --form 'to=群聊名称' --form content=@'/your/file/path.txt' --form 'isRoom=1'")
             a={"success": True,"data": {"type": "text","content":"以上是大家的发言时间记录，请大家踊跃发言，一起成长呀"}}
         if(args[0]=="feedback"):    #feedback功能处
             sql="select roomname from POST where username='%s'" % (name)
@@ -185,7 +185,7 @@ async def print_json(source: str=Form(), content: str = Form(), isMentioned: str
             dname=dname[3:-1]                                       
             a={"success": True,"data": {"type": "text","content":"成员"+dname+"，你的反馈我已经告诉主人了，感谢你的支持呀！"}}
             fb=args[1]
-            cmd='curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "Doom.","type": "text","content":"实验室的'+dname+'发送了反馈，内容为'+fb+'，请迅速处理!"}\''
+            cmd='curl --location "http://localhost:3001/webhook/msg" --header "Content-Type: application/json" --data \'{"to": "Doom.","type": "text","content":"群组的'+dname+'发送了反馈，内容为'+fb+'，请迅速处理!"}\''
             os.system(cmd)
     conn.commit()
     conn.close()
